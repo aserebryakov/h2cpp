@@ -23,7 +23,7 @@ def doxy_gen_params(params, tab_level):
 def doxy_gen_comment(params, return_type, tab_level):
 	doxy_comment = doxy_tabbing(tab_level) + doxy_header + doxy_gen_params(params, tab_level)
 	
-	if return_type == "void":
+	if (return_type != "void") and (return_type != ""):
 		doxy_comment = doxy_comment + doxy_tabbing(tab_level) + doxy_middle + doxy_return
 	
 	doxy_comment = doxy_comment + doxy_tabbing(tab_level) + doxy_footer

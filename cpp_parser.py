@@ -26,8 +26,18 @@ def get_class(content):
 	return class_name
 
 def get_methods(content):
+	methods = []
 	expr = re.compile("[\w\s_:]+\([^)]*\)") 
-	methods = expr.findall(content)
+	methods_tmp = expr.findall(content)
+
+	for method in methods_tmp:
+		#method.rstrip("\n\t")
+		method = re.sub(r"\s*", "", method, 1)
+		print(method)
+		methods.append(method)
+
+	print(methods)
+
 	return methods
 
 def get_arguments(method_decl):
@@ -39,16 +49,23 @@ def get_arguments(method_decl):
 	
 	for arg in arg_list_tmp:
 			arg = re.sub(r"^[^\s]+\s+", "", arg)
-			arguments_list.append(arg)
+			if arg != "":
+				arguments_list.append(arg)
 
 	return arguments_list
 
 def get_return_type(method_decl):
-	print(method_decl)
 	ret_type = re.sub(r"^\s*", "", method_decl)
-	print(ret_type)
-	ret_type = re.sub(r"\(.+", "", ret_type)
-	print(ret_type)
-	ret_type = re.sub(r"\s+.*", "", ret_type)
+	
+	# ret_type_1 and ret_type_2 are introduced to handle the case of the constructor
+
+	ret_type_1 = re.sub(r"\(.+", "", ret_type)
+	ret_type_2 = re.sub(r"\s+.*", "", ret_type_1)
+
+	if(ret_type_1 == ret_type_2):
+		ret_type = ""
+	else:
+		ret_type = ret_type_2
 
 	return ret_type
+
