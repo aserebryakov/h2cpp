@@ -3,7 +3,7 @@
 import sys
 import cpp_generator
 
-VERSION = "0.00"
+VERSION = "0.01"
 
 def main(argv):
 	print("h2cpp v" + VERSION);
