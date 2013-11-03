@@ -6,12 +6,10 @@ import re
 def find_all(array, regex):
 	matches = []
 
-	print(array)
 	for string in array:
 		if regex.search(string) != None:
 			matches.append(string)
 
-	print(matches)
 	return matches
 
 
@@ -32,7 +30,6 @@ def get_namespaces(content):
 		ns = ex.sub("", ns)
 		namespaces.append(ns)
 
-	print(namespaces)
 	return namespaces
 
 
@@ -50,11 +47,7 @@ def get_methods(content):
 
 	for method in methods_tmp:
 		method = re.sub(r"\s+", "", method, 1)
-		print(method)
 		methods.append(method)
-
-	print("Methods\n")
-	print(methods)
 
 	return methods
 
